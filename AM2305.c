@@ -118,7 +118,12 @@ bool 		AM2305_ReadData(float *pTemp,float *pHumi)
     }
     if(pTemp!=NULL)
     {
-      *pTemp = ((AM2305_ReadRawData[2]*256)+AM2305_ReadRawData[3]) / 10.0f;      
+      if((AM2305_ReadRawData[2] & MinusTempMask) > 0){
+				*pTemp = -(((AM2305_ReadRawData[2]&(~MinusTempMask)) * 256) + AM2305_ReadRawData[3]) / 10.0f;
+			}
+			else{
+				*pTemp = ((AM2305_ReadRawData[2] * 256) + AM2305_ReadRawData[3]) / 10.0f;
+			} 
     }  
     return true;    
   }
