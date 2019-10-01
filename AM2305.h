@@ -10,6 +10,6 @@
 bool 		AM2305_Init(void);
 bool 		AM2305_ReadData(float *pTemp,float *pHumi);    
 
-
+#define MinusTempMask 0x80
 
 #endif
